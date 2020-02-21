@@ -30,11 +30,11 @@ https://api.optguard.com/v1/check
 
 Pass these along as query string parameters on your endpoint.
 
-| Field			| Type		| Description								| Example		| Required	|
-|---------------|-----------|-----------------------------------------------------------------------|
-| `access_key`	| String	| Enter your Access Key						| `123456`		| Yes		|
-| `secret_key`	| String	| Enter your Secret Key						| `987`			| Yes		|
-| `ip`			| String	| IP Address to be checked					| `127.0.0.1`	| Yes		|
+| Field         | Type      | Description               | Example     | Required |
+|---------------|-----------|----------------------------------------------------|
+| `access_key`  | String	| Enter your Access Key     | `123456`    | Yes      |
+| `secret_key`  | String	| Enter your Secret Key     | `987`       | Yes      |
+| `ip`          | String	| IP Address to be checked  | `127.0.0.1` | Yes      |
 
 **Sample API Calls**
 
