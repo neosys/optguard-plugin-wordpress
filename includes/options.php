@@ -9,12 +9,11 @@
 
 	/**
 	 * Get data from the optGuard API
-	 * @param  string $access_key The account access_key
-	 * @return array         Data from the MailChimp API
+	 * @return array         Data from the optGuard API
 	 */
 	function optguard_api_get_account_data($access_key = null)
 	{
-		if (OPTGUARD_ACCESS_KEY) return;
+		if (OPTGUARD_ACCESS_KEY) return false;
 
 		// Create API call
 		$url = 'https://api.optguard.com/v1/account?access_key=' . OPTGUARD_ACCESS_KEY;
@@ -22,9 +21,7 @@
 		// Get data from  optGuard
 		$request = wp_remote_get($url, $params);
 		$response = wp_remote_retrieve_body($request);
-		$data = json_decode($response, true);
-
-		return $data;
+		return json_decode($response, true);
 	}
 
 	/**
@@ -45,28 +42,28 @@
 	function optguard_settings_init()
 	{
 		// register a new setting for "optguard" page
-		register_setting('optguard', 'optguard_options');
+		register_setting(OPTGUARD, OPTGUARD_OPTIONS);
 
 		// register a new section in the "optguard" page
 		add_settings_section(
-			'optguard_section_credentials',
-			__('Enter optGuard Account Credentials', 'optguard'),
+			OPTGUARD_SECTION_CREDENTIALS,
+			__('Enter optGuard Account Credentials', OPTGUARD),
 			'optguard_section_credentials_cb',
-			'optguard'
+			OPTGUARD
 		);
 
 		// register a new field in the "optguard_section_credentials" section, inside the "optguard" page
 		add_settings_field(
 			'optguard_field_access_key', // as of WP 4.6 this value is used only internally
 			// use $args' label_for to populate the id inside the callback
-			__('Access Key', 'optguard'),
+			__('Access Key', OPTGUARD),
 			'optguard_field_access_key_cb',
-			'optguard',
-			'optguard_section_credentials',
+			OPTGUARD,
+			OPTGUARD_SECTION_CREDENTIALS,
 			[
 				'label_for' => 'optguard_field_access_key',
 				'class' => 'optguard_row',
-				'optguard_custom_data' => 'custom',
+				OPTGUARD_CUSTOM_DATA => 'custom',
 			]
 		);
 
@@ -74,14 +71,14 @@
 		add_settings_field(
 			'optguard_field_secret_key', // as of WP 4.6 this value is used only internally
 			// use $args' label_for to populate the id inside the callback
-			__('Access Key', 'optguard'),
+			__('Access Key', OPTGUARD),
 			'optguard_field_secret_key_cb',
-			'optguard',
-			'optguard_section_credentials',
+			OPTGUARD,
+			OPTGUARD_SECTION_CREDENTIALS,
 			[
 				'label_for' => 'optguard_field_secret_key',
 				'class' => 'optguard_row',
-				'optguard_custom_data' => 'custom',
+				OPTGUARD_CUSTOM_DATA => 'custom',
 			]
 		);
 	}
@@ -104,7 +101,7 @@
 	function optguard_section_credentials_cb($args)
 	{
 	?>
-		<p id="<?php echo esc_attr($args['id']); ?>"><?php esc_html_e('Follow the white rabbit.', 'optguard'); ?></p>
+		<p id="<?php echo esc_attr($args['id']); ?>"><?php esc_html_e('Follow the white rabbit.', OPTGUARD); ?></p>
 	<?php
 	}
 
@@ -118,28 +115,24 @@
 	// you can add custom key value pairs to be used inside your callbacks.
 	function optguard_field_access_key_cb($args)
 	{
-		// get the value of the setting we've registered with register_setting()
-		$options = get_option('optguard_options');
 		// output the field
 	?>
-		<input type="text" value="<?php echo get_option(esc_attr($args['label_for']));?>" id="<?php echo esc_attr($args['label_for']); ?>" data-custom="<?php echo esc_attr($args['optguard_custom_data']); ?>" name="optguard_options[<?php echo esc_attr($args['label_for']); ?>]">
+		<input type="text" value="<?php echo get_option(esc_attr($args['label_for']));?>" id="<?php echo esc_attr($args['label_for']); ?>" data-custom="<?php echo esc_attr($args[OPTGUARD_CUSTOM_DATA]); ?>" name="optguard_options[<?php echo esc_attr($args['label_for']); ?>]">
 
 		<p class="description">
-			<?php esc_html_e('Enter your optGuard account Access Key', 'optguard'); ?>
+			<?php esc_html_e('Enter your optGuard account Access Key', OPTGUARD); ?>
 		</p>
 	<?php
 	}
 
 	function optguard_field_secret_key_cb($args)
 	{
-		// get the value of the setting we've registered with register_setting()
-		$options = get_option('optguard_options');
 		// output the field
 	?>
-		<input type="text" value="<?php echo get_option(esc_attr($args['label_for']));?>" id="<?php echo esc_attr($args['label_for']); ?>" data-custom="<?php echo esc_attr($args['optguard_custom_data']); ?>" name="optguard_options[<?php echo esc_attr($args['label_for']); ?>]">
+		<input type="text" value="<?php echo get_option(esc_attr($args['label_for']));?>" id="<?php echo esc_attr($args['label_for']); ?>" data-custom="<?php echo esc_attr($args[OPTGUARD_CUSTOM_DATA]); ?>" name="optguard_options[<?php echo esc_attr($args['label_for']); ?>]">
 
 		<p class="description">
-			<?php esc_html_e('Enter your optGuard account Secret Key', 'optguard'); ?>
+			<?php esc_html_e('Enter your optGuard account Secret Key', OPTGUARD); ?>
 		</p>
 	<?php
 	}
@@ -154,7 +147,7 @@
 			'optGuard Anti-Fraud',
 			'optGuard Options',
 			'manage_options',
-			'optguard',
+			OPTGUARD,
 			'optguard_options_page_html'
 		);
 	}
@@ -181,7 +174,7 @@
 		// wordpress will add the "settings-updated" $_GET parameter to the url
 		if (isset($_GET['settings-updated'])) {
 			// add settings saved message with the class of "updated"
-			add_settings_error('optguard_messages', 'optguard_message', __('Settings Saved', 'optguard'), 'updated');
+			add_settings_error('optguard_messages', 'optguard_message', __('Settings Saved', OPTGUARD), 'updated');
 		}
 
 		// show error/update messages
@@ -192,10 +185,10 @@
 			<form action="options.php" method="post">
 				<?php
 				// output security fields for the registered setting "optguard"
-				settings_fields('optguard');
+				settings_fields(OPTGUARD);
 				// output setting sections and their fields
 				// (sections are registered for "optguard", each field is registered to a specific section)
-				do_settings_sections('optguard');
+				do_settings_sections(OPTGUARD);
 				// output save settings button
 				submit_button('Save Settings');
 				?>

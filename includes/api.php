@@ -33,10 +33,14 @@
     |	...unless you know what you are doing   |
     ********************************************/	
 	
-	// optGuard defines.
-	define( 'OPTGUARD_VERSION',					'1.0.0' );
-	define( 'OPTGUARD_WP_VERSION',				'4.9' );
-	define( 'OPTGUARD_PHP_VERSION',				'5.6' );
+    // optGuard defines.
+    define('OPTGUARD',                          'optguard');                            // WARNING!! Changing this could break prior installs!
+    define('OPTGUARD_OPTIONS',                  'optguard_options');                    // WARNING!! Changing this could break prior installs!
+    define('OPTGUARD_SECTION_CREDENTIALS',      'optguard_section_credentials');        // WARNING!! Changing this could break prior installs!
+    define('OPTGUARD_CUSTOM_DATA',              'optguard_custom_data');                // WARNING!! Changing this could break prior installs!
+	define('OPTGUARD_VERSION',					'1.0.0');
+	define('OPTGUARD_WP_VERSION',				'4.9');
+	define('OPTGUARD_PHP_VERSION',				'5.6');
     define('VER',								'1.0.0');                               // allows us to identify known bugs and version control; DONT touch!
     define('PROTOCOL', 'https://');	// Probably shouldn't touch! ;)
     error_reporting(E_ALL ^ E_NOTICE); // Avoid notice outputs for default PHP config
