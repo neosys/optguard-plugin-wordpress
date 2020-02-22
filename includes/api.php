@@ -94,5 +94,5 @@
         elseif ( !empty($server['HTTP_HOST']) ) {$referrer = $server['HTTP_HOST'];} 	// if they are on OUR site (or directly accessing this script)
         else { $referrer=$vip; }
 
-        return array('ip'=>$ip, 'referrer'=>$referrer);
+        return array('ip'=>$vip, 'referrer'=>$referrer);
 	}
