@@ -53,6 +53,11 @@ https://api.optguard.com/v1/check?access_key=123456&secret_key=987&ip=127.0.0.1
 
 The API will return a JSON object with a msg, status_msg, and status.
 
+1. msg: A human-readable message regarding the request.
+2. status_msg: A textual representation of the status code.
+3. status: A numeric representation of the status of the request (usually 0 or 1).
+
+
 ```json
 {
     "msg": "IP is on the Blacklist",
