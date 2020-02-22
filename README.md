@@ -5,10 +5,16 @@ Add optGuard anti-fraud protection to WordPress sites. [optGuard API](https://ap
 
 First, configure your optGuard Account credentials under `Settings > optGuard Anti-Fraud` in the Dashboard.
 
+Second, let optGuard do our thing, sit back, and relax while we combat fraud for you!
+
+That's it! :)
+
 **Required Fields**
 
 - `Acess Key` - Your Access Key from optGuard.
 - `Secret Key` - Your Secret Key from optGuard.
+
+For those who are interested in "how it all works," here's some insight:
 
 **API Details**
 
