@@ -14,10 +14,10 @@
 	 */
 	function optguard_api_get_account_data($access_key = null)
 	{
-		if (get_option(esc_attr('optguard_field_access_key'))) return;
+		if (OPTGUARD_ACCESS_KEY) return;
 
 		// Create API call
-		$url = 'https://api.optguard.com/v1/account?access_key=' . get_option(esc_attr('optguard_field_access_key'));
+		$url = 'https://api.optguard.com/v1/account?access_key=' . OPTGUARD_ACCESS_KEY;
 
 		// Get data from  optGuard
 		$request = wp_remote_get($url, $params);

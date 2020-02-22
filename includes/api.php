@@ -7,8 +7,8 @@
      *
      *	For the latest documentation and best practices: please visit https://api.optguard.com/doc
      */
-    // define('ACCESS_KEY', '');
-    // define('SECRET_KEY', '');
+    define('OPTGUARD_ACCESS_KEY', get_option(esc_attr('optguard_field_access_key')));
+    define('OPTGUARD_SECRET_KEY', get_option(esc_attr('optguard_field_secret_key')));
     define('API_REVISION', 'v1'); // Which API revision?
 	
     /************************************************************************
@@ -44,8 +44,8 @@
     $referrer = getReferrer($_SERVER, $HTTP_X_FORWARDED_FOR);
 
     $aArgs['ip'] = $referrer['ip'];
-    $aArgs['access_key'] = get_option(esc_attr('optguard_field_access_key'));
-    $aArgs['secret_key'] = get_option(esc_attr('optguard_field_secret_key'));
+    $aArgs['access_key'] = ACCESS_KEY;
+    $aArgs['secret_key'] = SECRET_KEY;
     $aArgs['ver'] = VER;
 
     $sResp = _fileGetContent( PROTOCOL.'api.optguard.com/'.API_REVISION.'/check?', $aArgs );
