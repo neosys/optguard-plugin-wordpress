@@ -11,9 +11,9 @@
 	 * Get data from the optGuard API
 	 * @return array         Data from the optGuard API
 	 */
-	function optguard_api_get_account_data($access_key = null)
+	function optguard_api_get_account_data()
 	{
-		if (OPTGUARD_ACCESS_KEY) return false;
+		if (OPTGUARD_ACCESS_KEY) { return false; }
 
 		// Create API call
 		$url = 'https://api.optguard.com/v1/account?access_key=' . OPTGUARD_ACCESS_KEY;
@@ -61,7 +61,7 @@
 			OPTGUARD,
 			OPTGUARD_SECTION_CREDENTIALS,
 			[
-				'label_for' => 'optguard_field_access_key',
+				OPTGUARD_LABEL_FOR => 'optguard_field_access_key',
 				'class' => 'optguard_row',
 				OPTGUARD_CUSTOM_DATA => 'custom',
 			]
@@ -76,7 +76,7 @@
 			OPTGUARD,
 			OPTGUARD_SECTION_CREDENTIALS,
 			[
-				'label_for' => 'optguard_field_secret_key',
+				OPTGUARD_LABEL_FOR => 'optguard_field_secret_key',
 				'class' => 'optguard_row',
 				OPTGUARD_CUSTOM_DATA => 'custom',
 			]
@@ -117,7 +117,7 @@
 	{
 		// output the field
 	?>
-		<input type="text" value="<?php echo get_option(esc_attr($args['label_for']));?>" id="<?php echo esc_attr($args['label_for']); ?>" data-custom="<?php echo esc_attr($args[OPTGUARD_CUSTOM_DATA]); ?>" name="optguard_options[<?php echo esc_attr($args['label_for']); ?>]">
+		<input type="text" value="<?php echo get_option(esc_attr($args[OPTGUARD_LABEL_FOR]));?>" id="<?php echo esc_attr($args[OPTGUARD_LABEL_FOR]); ?>" data-custom="<?php echo esc_attr($args[OPTGUARD_CUSTOM_DATA]); ?>" name="optguard_options[<?php echo esc_attr($args[OPTGUARD_LABEL_FOR]); ?>]">
 
 		<p class="description">
 			<?php esc_html_e('Enter your optGuard account Access Key', OPTGUARD); ?>
@@ -129,7 +129,7 @@
 	{
 		// output the field
 	?>
-		<input type="text" value="<?php echo get_option(esc_attr($args['label_for']));?>" id="<?php echo esc_attr($args['label_for']); ?>" data-custom="<?php echo esc_attr($args[OPTGUARD_CUSTOM_DATA]); ?>" name="optguard_options[<?php echo esc_attr($args['label_for']); ?>]">
+		<input type="text" value="<?php echo get_option(esc_attr($args[OPTGUARD_LABEL_FOR]));?>" id="<?php echo esc_attr($args[OPTGUARD_LABEL_FOR]); ?>" data-custom="<?php echo esc_attr($args[OPTGUARD_CUSTOM_DATA]); ?>" name="optguard_options[<?php echo esc_attr($args[OPTGUARD_LABEL_FOR]); ?>]">
 
 		<p class="description">
 			<?php esc_html_e('Enter your optGuard account Secret Key', OPTGUARD); ?>
